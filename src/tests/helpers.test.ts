@@ -1,4 +1,4 @@
-import { getSportIcon } from './helpers'
+import { getSportIcon } from '../helpers'
 
 describe('getSportIcon', () => {
   it('should return the fallback if the sport does not have a corresponding svg', () => {
