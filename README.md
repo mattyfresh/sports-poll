@@ -2,9 +2,11 @@
 
 You can follow the below commands to test and run the app.
 
-`yarn start` - dev server
-`yarn build` - output to directory to run on a web server
-`yarn test` - run tests via `jest`
+- `yarn start` - dev server
+
+- `yarn build` - output to directory to run on a web server
+
+- `yarn test` - run tests via `jest`
 
 ## TODOS
 
