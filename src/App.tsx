@@ -28,6 +28,11 @@ interface State {
 class App extends Component<any, State> {
   private match: MatchMeta
 
+  // initialize Noty with config
+  private noty = new Noty({
+    theme: 'mint',
+  })
+
   constructor(props: any) {
     super(props)
     this.match = getRandomMatch()
@@ -46,11 +51,8 @@ class App extends Component<any, State> {
   private triggerNotification(teamName: string) {
     const text =
       teamName === 'draw' ? 'You voted for a draw' : `You voted for ${teamName}`
-    const notification = new Noty({
-      theme: 'mint',
-      text,
-    })
-    notification.show()
+    this.noty.setText(text)
+    this.noty.show()
   }
 
   updateTally = (
