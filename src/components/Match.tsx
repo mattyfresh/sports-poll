@@ -51,7 +51,11 @@ const CurrentTallyList = styled.ul`
 interface Props {
   match: MatchMeta
   tally: any
-  updateTally: (matchId: number, outcome: 'home' | 'away' | 'draw') => void
+  updateTally: (
+    matchId: number,
+    teamName: string,
+    outcome: 'home' | 'away' | 'draw'
+  ) => void
 }
 
 const Match: React.SFC<Props> = ({ match, tally, updateTally }) => {
@@ -78,19 +82,19 @@ const Match: React.SFC<Props> = ({ match, tally, updateTally }) => {
           </Typography>
           <ButtonsWrapper>
             <Button
-              onClick={() => updateTally(match.id, 'home')}
+              onClick={() => updateTally(match.id, match.homeName, 'home')}
               color="primary"
             >
               {match.homeName}
             </Button>
             <Button
-              onClick={() => updateTally(match.id, 'draw')}
+              onClick={() => updateTally(match.id, 'draw', 'draw')}
               color="inherit"
             >
               draw
             </Button>
             <Button
-              onClick={() => updateTally(match.id, 'away')}
+              onClick={() => updateTally(match.id, match.awayName, 'away')}
               color="secondary"
             >
               {match.awayName}

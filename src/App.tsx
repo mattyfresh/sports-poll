@@ -3,6 +3,7 @@ import Match from './components/Match'
 import { MatchMeta } from './typings/types'
 import { getRandomMatch } from './helpers'
 import styled from 'styled-components'
+import Noty from 'noty'
 
 const AppWrapper = styled.div`
   align-items: center;
@@ -38,11 +39,25 @@ class App extends Component<any, State> {
     }
   }
 
-  updateLocalStorage() {
+  private updateLocalStorage() {
     localStorage.setItem('SCORES', JSON.stringify(this.state.tally))
   }
 
-  updateTally = (matchId: number, outcome: 'home' | 'away' | 'draw') => {
+  private triggerNotification(teamName: string) {
+    const text =
+      teamName === 'draw' ? 'You voted for a draw' : `You voted for ${teamName}`
+    const notification = new Noty({
+      theme: 'mint',
+      text,
+    })
+    notification.show()
+  }
+
+  updateTally = (
+    matchId: number,
+    winningTeamName: string,
+    outcome: 'home' | 'away' | 'draw'
+  ) => {
     const currentMatch = this.state.tally[matchId]
     this.setState(
       {
@@ -58,7 +73,10 @@ class App extends Component<any, State> {
           },
         },
       },
-      this.updateLocalStorage
+      () => {
+        this.updateLocalStorage()
+        this.triggerNotification(winningTeamName)
+      }
     )
   }
 
